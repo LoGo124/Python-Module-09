@@ -1,3 +1,4 @@
+from typing import Optional
 from datetime import datetime
 from enum import Enum
 
@@ -19,8 +20,8 @@ class AlienContact(BaseModel):
     signal_strength: float = Field(ge=0.0, le=10.0)
     duration_minutes: int = Field(ge=1, le=1440)
     witness_count: int = Field(ge=1, le=100)
-    message_received: str | None = Field(default=None, max_length=500)
-    is_verified: bool = False
+    message_received: Optional[str] = Field(default=None, max_length=500)
+    is_verified: Optional[bool] = Field(default=False)
 
     @model_validator(mode="after")
     def validate_contact_rules(self) -> "AlienContact":
